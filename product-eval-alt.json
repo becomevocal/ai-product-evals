@@ -11,12 +11,7 @@
         "enabled": true,
         "config": {
           "message": "Searching..."
-        },
-        "promptId": null,
-        "contextTemplateId": null,
-        "itemType": "context",
-        "prompt": null,
-        "contextTemplate": null
+        }
       },
       {
         "id": "step-new-1761870808516",
@@ -42,12 +37,7 @@
         "enabled": true,
         "config": {
           "message": "Creating table for email...."
-        },
-        "promptId": null,
-        "contextTemplateId": null,
-        "itemType": "context",
-        "prompt": null,
-        "contextTemplate": null
+        }
       },
       {
         "id": "step_01k8vecr4df20brsz8watgdzap",
@@ -65,12 +55,7 @@
           "streamOutput": false,
           "outputVariable": "prompt_result2",
           "responseFormat": "html"
-        },
-        "promptId": null,
-        "contextTemplateId": null,
-        "itemType": "prompt",
-        "prompt": null,
-        "contextTemplate": null
+        }
       },
       {
         "id": "step_01k8vecr4df20brszjf5p0ejcf",
@@ -80,12 +65,7 @@
         "enabled": true,
         "config": {
           "message": "Sending email...."
-        },
-        "promptId": null,
-        "contextTemplateId": null,
-        "itemType": "context",
-        "prompt": null,
-        "contextTemplate": null
+        }
       },
       {
         "id": "step_01k8vecr4df20brszx4g86jp9k",
@@ -100,12 +80,7 @@
           "subject": "Your Car Search",
           "errorHandling": "fail",
           "outputVariable": "email_result"
-        },
-        "promptId": null,
-        "contextTemplateId": null,
-        "itemType": "context",
-        "prompt": null,
-        "contextTemplate": null
+        }
       },
       {
         "id": "step_01k8vecr4df20brt01409nzpmh",
@@ -115,12 +90,7 @@
         "enabled": true,
         "config": {
           "message": "Check your email! The car search is done."
-        },
-        "promptId": null,
-        "contextTemplateId": null,
-        "itemType": "context",
-        "prompt": null,
-        "contextTemplate": null
+        }
       }
     ]
   },
