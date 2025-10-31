@@ -127,8 +127,12 @@
   "records": [
     {
       "name": "Test Run 1",
-      "type": "tool_test",
-      "metadata": {}
+      "type": "car_test",
+      "metadata": {
+        "location": "San Francisco, CA",
+        "email": "nate@travrse.ai",
+        "name": "Nate Stewart"
+      }
     }
   ],
   "eval_configs": [
