@@ -1,0 +1,143 @@
+{
+  "flow_definition": {
+    "name": "Car email thing",
+    "description": "Flow with 7 steps",
+    "steps": [
+      {
+        "id": "step_01k8tyxev4fajs6rymc9z8z5r3",
+        "type": "send-stream",
+        "name": "Send Stream",
+        "order": 1,
+        "enabled": true,
+        "config": {
+          "message": "Searching..."
+        }
+      },
+      {
+        "id": "step_01k8tyxev4fajs6ryw4expmp66",
+        "type": "prompt",
+        "name": "Prompt 1",
+        "order": 2,
+        "enabled": true,
+        "config": {
+          "text": "Give me search results for cars in the area of {{_record.metadata.location}}",
+          "model": "claude-opus-4-1-20250805",
+          "tools": {
+            "toolIds": [
+              "builtin:anthropic_web_search"
+            ]
+          },
+          "user_prompt": "Give me search results for cars in the area of {{_record.metadata.location}}",
+          "stream_output": false,
+          "output_variable": "prompt_result",
+          "responseFormat": "text"
+        }
+      },
+      {
+        "id": "step_01k8tyxev4fajs6rz5vq8d7h95",
+        "type": "send-stream",
+        "name": "Send Stream",
+        "order": 3,
+        "enabled": true,
+        "config": {
+          "message": "Creating table for email...."
+        }
+      },
+      {
+        "id": "step_01k8tyxev4fajs6rz9yc83wbhw",
+        "type": "prompt",
+        "name": "Prompt 2",
+        "order": 4,
+        "enabled": true,
+        "config": {
+          "text": "Make a pretty html table with the content of {{prompt_result}}",
+          "model": "qwen/qwen3-8b",
+          "tools": {
+            "toolIds": []
+          },
+          "user_prompt": "Make a pretty html table with the content of {{prompt_result}}",
+          "stream_output": false,
+          "output_variable": "prompt_result2",
+          "responseFormat": "html"
+        }
+      },
+      {
+        "id": "step_01k8tyxev4fajs6rzgz2mxaa3m",
+        "type": "send-stream",
+        "name": "Send Stream",
+        "order": 5,
+        "enabled": true,
+        "config": {
+          "message": "Sending email...."
+        }
+      },
+      {
+        "id": "step_01k8tyxev4fajs6rzypk5y2zth",
+        "type": "send-email",
+        "name": "Send Email",
+        "order": 6,
+        "enabled": true,
+        "config": {
+          "to": "{{_record.metadata.email}}",
+          "from": "demo@messages.travrse.ai",
+          "html": "<div style=\"max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;\">\n  <h1 style=\"color: #333; font-size: 24px; margin-bottom: 10px;\">Your Car Search</h1>\n  <p style=\"font-size: 16px; color: #666; margin-bottom: 20px;\">Dear {{_record.metadata.name}},</p>\n  <p style=\"font-size: 16px; color: #666; margin-bottom: 20px;\">We've received your car search request and are happy to assist you in finding your dream car.</p>\n  <div style=\"background-color: #f7f7f7; padding: 20px; border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 0 10px rgba(0,0,0,0.1);\">\n    <h2 style=\"color: #333; font-size: 18px; margin-bottom: 10px;\">Search Results</h2>\n    <p style=\"font-size: 16px; color: #666; margin-bottom: 20px;\">Based on your preferences, we've found the following cars:</p>\n    <p style=\"font-size: 16px; color: #666; margin-bottom: 20px;\">{{prompt_result2}}</p>\n  </div>\n  <p style=\"font-size: 16px; color: #666; margin-bottom: 20px;\">To proceed with your car search, please click the link below:</p>\n  <a href=\"#\" style=\"background: #007cba; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;\">View Search Results</a>\n  <p style=\"font-size: 14px; color: #999; margin-top: 20px;\">Best regards,<br>Travrse AI</p>\n</div>",
+          "subject": "Your Car Search",
+          "error_handling": "fail",
+          "output_variable": "email_result"
+        }
+      },
+      {
+        "id": "step_01k8tyxev4fajs6s01qawpn52m",
+        "type": "send-stream",
+        "name": "Send Stream",
+        "order": 7,
+        "enabled": true,
+        "config": {
+          "message": "Check your email! The car search is done."
+        }
+      }
+    ]
+  },
+  "records": [
+    {
+      "name": "Test Run 1",
+      "type": "car_test",
+      "metadata": {
+        "location": "San Francisco, CA",
+        "email": "nate@travrse.ai",
+        "name": "Nate Stewart"
+      }
+    }
+  ],
+  "eval_configs": [
+    {
+      "eval_name": "Baseline",
+      "step_overrides": {}
+    },
+    {
+      "eval_name": "Exa Search",
+      "step_overrides": {
+        "step_01k8tyxev4fajs6ryw4expmp66": {
+          "tools": {
+            "tool_ids": [
+              "builtin:exa"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "eval_name": "All Qwen 8b + Exa",
+      "step_overrides": {
+        "step_01k8tyxev4fajs6ryw4expmp66": {
+          "model": "qwen/qwen3-8b",
+          "tools": {
+            "tool_ids": [
+              "builtin:exa"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "flow_definition": {
+    "name": "Generated Flow",
+    "description": "Flow with 1 step",
+    "steps": [
+      {
+        "id": "prompt-new-1761868586298",
+        "name": "Prompt 1",
+        "type": "prompt",
+        "order": 0,
+        "enabled": true,
+        "config": {
+          "text": "Add 5 + 3892, give me into on hot coffee, then return the top search result on horse barns",
+          "model": "qwen/qwen3-8b",
+          "response_format": "markdown",
+          "output_variable": "prompt_result",
+          "tools": {
+            "tool_ids": [
+              "tool_01k7xgm115ecravbwz410nn14a",
+              "tool_01k7xqys3pe4a9dvnmvfzx71nx",
+              "builtin:exa"
+            ]
+          },
+          "reasoning": true,
+          "user_prompt": "Add 5 + 3892, give me into on hot coffee, then return the top search result on horse barns"
+        }
+      }
+    ]
+  },
+  "records": [
+    {
+      "name": "Test Run 1",
+      "type": "tool_test",
+      "metadata": {}
+    },
+    {
+      "name": "Test Run 2",
+      "type": "tool_test",
+      "metadata": {}
+    }
+  ],
+  "eval_configs": [
+    {
+      "eval_name": "Mixlayer",
+      "step_overrides": {}
+    },
+    {
+      "eval_name": "Together",
+      "step_overrides": {
+        "prompt-new-1761868586298": {
+          "model": "togetherai/qwen/Qwen3-8B"
+        }
+      }
+    }
+  ]
+}
