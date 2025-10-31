@@ -1,12 +1,13 @@
-# AI Product Eval Runner
+# AI Product Eval Runner Demo
 
-This directory contains scripts and configuration files for running evals against the Travrse API.
+This directory contains scripts and configuration files for running product focused evals against the Travrse API. Put together for an SF AI Tinkerers talk @ Okta.
 
 ## Files
 
 - **`run-eval.mjs`** - Main script that submits evals, polls for completion, and displays results
-- **`product-eval.json`** - Sample eval configuration file
-- **`tool-eval.json`** - Sample eval configuration file for tool testing
+- **`product-eval.json`** - Sample eval configuration file that tests a local car finder AI flow with multiple steps, models, and tools
+- **`product-eval-alt.json`** - Same product flow with Exa search used as an integration instead of using LLM with Exa search tool
+- **`tool-eval.json`** - Sample eval configuration file that tests multiple tool calls across Mixlayer and Together
 
 ## Usage
 
